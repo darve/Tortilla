@@ -1,0 +1,29 @@
+<div id="home" class="page">
+
+	<div class="inner">
+		<h1>Register</h1>
+		
+		<form novalidate>
+			<div class="row">
+				<label>Username</label><input type="text" ng-model="user.username">
+			</div>
+			<div class="row">
+				<label>Email Address</label><input type="text" ng-model="user.email">
+			</div>
+			<div class="row">
+				<label>Password</label><input type="password" ng-model="user.password">
+			</div>
+			<div class="row">
+				<label>Domain</label><input type="text" ng-model="user.domain">
+			</div>
+			<div class="row">
+				<label>First name</label><input type="text" ng-model="user.name_first">
+			</div>
+			<div class="row">
+				<label>Surname</label><input type="text" ng-model="user.name_second">
+			</div>
+			<input type="submit" ng-click="register()">
+		</form>
+	</div>
+
+</div>

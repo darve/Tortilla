@@ -1,0 +1,38 @@
+<div id="contrast" class="page">
+	<div class="section">
+		<div class="inner">
+			<form>
+				<div class="contrast-option">
+					<select ng-model="contrast1" ng-options="o as o for o in consonants">
+					</select>	
+				</div>
+				<div class="contrast-option">
+					<select ng-model="contrast2" ng-options="o as o for o in consonants">
+					</select>	
+				</div>
+				<div class="contrast-option">
+					<select ng-model="contrast3" ng-options="o as o for o in consonants">
+					</select>	
+				</div>
+				<div class="contrast-option">
+					<select ng-model="contrast4" ng-options="o as o for o in consonants">
+					</select>	
+				</div>
+				<div class="contrast-option">
+					<select ng-model="contrast5" ng-options="o as o for o in consonants">
+					</select>	
+				</div>
+
+				<hr/>
+
+				<ul ng-repeat="item in output">
+					<li>
+						<span ng-repeat="word in item">{{ word }}, </span>
+					</li>
+				</ul>
+
+
+			</form>		
+		</div>
+	</div>
+</div>

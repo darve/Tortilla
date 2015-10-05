@@ -1,0 +1,62 @@
+
+/*  Form styling, yeah?
+/* ======================================= */
+
+input[type=text], input[type=email], input[type=phone], select, textarea {
+	border: 1px solid $flat-gray-2;
+	outline: none;
+	padding: 8px 5px;
+	width: 100%;
+	font-size: 13px;
+	@include border-radius( 4px );
+
+	&.margin-bottom {
+		margin-bottom: 20px;
+	}
+}
+
+textarea {
+	height: 100px;
+}
+
+input[type=checkbox] {
+	margin: 0 0 0 0;
+}
+
+form .row {
+	display: block;
+	margin: 0 0 16px 0;
+	
+	&.full-width {
+		width: 100%;
+	}
+
+	&.half-width {
+		@include inline-block;
+		width: 47%;
+
+		&.left {
+			margin-right: 6%;
+		}
+	}
+
+	label {
+		display: block;
+		font-size: 15px;
+		padding: 0 0 3px 0;
+
+		&.inline-block {
+			@include inline-block;
+			vertical-align: top;
+		}
+	}
+
+	input {
+		display: block;
+
+		&.inline-block {
+			@include inline-block;
+			vertical-align: top;
+		}
+	}
+}

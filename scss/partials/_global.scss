@@ -1,0 +1,40 @@
+
+/* 	Global styles, yeah?
+/* ======================================= */
+
+* {
+	@include box-sizing( border-box );
+}
+
+body, html {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	font-family: sans-serif;
+}
+
+.section, .inner {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+.inner {
+    max-width: 1080px;
+}
+
+canvas {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    image-rendering: optimizeSpeed;
+    -webkit-interpolation-mode: nearest-neighbor;
+    z-index: 10;
+
+    &.nocursor {
+        cursor: none;
+    }
+}
