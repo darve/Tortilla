@@ -1,90 +1,35 @@
 
-/*  Symplify Prototype
-/* ================================== */
+'use strict';
 
-(function(w,d,n,ng,ns) {
+var ng = require('angular'),
+    app;
 
-    'use strict';
+require('angular-sanitize');
+require('angular.ui-router');
+require('./controllers/');
+require('./services/');
+require('./filters/');
 
-    var app = ng.module(ns, [
+app = ng.module('BriocheApp', ['ui.router', 'BriocheControllers']);
 
-        // All of the controllers
-        ns + '.GameController',
-        ns + '.HomeController',
-        ns + '.ListController',
-        ns + '.LoginController',
-        ns + '.MainController',
-        ns + '.RegisterController',
-        ns + '.SearchController',
-        ns + '.ContrastController',
+require('./views.js');
 
-        // Everything else
-        ns + '.services',
-        ns + '.filters'
-    ]);
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-    app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/");
 
-      // For any unmatched url, redirect to /state1
-      $urlRouterProvider.otherwise("/");
+    $stateProvider
+    .state('home', {
+        url: "/",
+        templateUrl: "home.html",
+        controller: "HomeController"
+    });
+}]);
 
-      $stateProvider
-        .state('login', {
-            url: "/login",
-            templateUrl: "login.html",
-            controller: "LoginController"
-        })
-
-        .state('contrast', {
-            url: "/contrast",
-            templateUrl: "contrast.html",
-            controller: "ContrastController"
-        })
-
-        .state('home', {
-            url: "/",
-            templateUrl: "home.html",
-            controller: "HomeController",
-            resolve: {
-                "currentAuth": ["Auth", function(Auth) {
-                return Auth.$requireAuth();
-            }]
-        }})
-
-        .state('lists', {
-            url: "/lists",
-            templateUrl: "lists.html",
-            controller: "ListController",
-            resolve: {
-                "currentAuth": ["Auth", function(Auth) {
-                   return Auth.$requireAuth();
-                }]
-            }
-        })
-
-        .state('game', {
-            url: "/game",
-            templateUrl: "game.html",
-            controller: "GameController",
-            resolve: {
-                "currentAuth": ["Auth", function(Auth){
-                    return Auth.$requireAuth();
-                }]
-            }
-        })
-
-        .state('register', {
-            url: "/register",
-            templateUrl: "register.html"
-        });
-    }]);
-
-    app.run(['$timeout', '$rootScope', '$http', '$state', function($timeout, $rootScope, $http, $state) {
-        console.log('app initiliased');
-          $rootScope.$on('$stateChangeError', function () {
-            // Redirect user to our login page
-            $state.go('login');
-          });
-    }]);
-
-})(window,document,navigator,window.angular,'SymplifyApp');
+app.run(['$timeout', '$rootScope', '$http', '$state', function($timeout, $rootScope, $http, $state) {
+    console.log('app initiliased');
+    $rootScope.$on('$stateChangeError', function () {
+        // Redirect user to our login page
+        // $state.go('login');
+    });
+}]);

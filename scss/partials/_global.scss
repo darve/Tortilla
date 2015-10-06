@@ -1,9 +1,9 @@
 
-/* 	Global styles, yeah?
+/* 	Global styles
 /* ======================================= */
 
 * {
-	@include box-sizing( border-box );
+	box-sizing: border-box;
 }
 
 body, html {
@@ -21,20 +21,4 @@ body, html {
 
 .inner {
     max-width: 1080px;
-}
-
-canvas {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    image-rendering: optimizeSpeed;
-    -webkit-interpolation-mode: nearest-neighbor;
-    z-index: 10;
-
-    &.nocursor {
-        cursor: none;
-    }
 }

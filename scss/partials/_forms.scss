@@ -1,14 +1,14 @@
 
-/*  Form styling, yeah?
+/*  Form styling
 /* ======================================= */
 
 input[type=text], input[type=email], input[type=phone], select, textarea {
-	border: 1px solid $flat-gray-2;
+	border: 1px solid #555;
 	outline: none;
 	padding: 8px 5px;
 	width: 100%;
 	font-size: 13px;
-	@include border-radius( 4px );
+	border-radius: 4px;
 
 	&.margin-bottom {
 		margin-bottom: 20px;
@@ -32,7 +32,7 @@ form .row {
 	}
 
 	&.half-width {
-		@include inline-block;
+		display: inline-block;
 		width: 47%;
 
 		&.left {
@@ -46,7 +46,7 @@ form .row {
 		padding: 0 0 3px 0;
 
 		&.inline-block {
-			@include inline-block;
+			display: inline-block;
 			vertical-align: top;
 		}
 	}
@@ -55,7 +55,7 @@ form .row {
 		display: block;
 
 		&.inline-block {
-			@include inline-block;
+			display: inline-block;
 			vertical-align: top;
 		}
 	}

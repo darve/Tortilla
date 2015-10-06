@@ -1,11 +1,6 @@
 
 'use strict';
 
-var ng = require('angular'),
-    app = ng.module('BriocheApp', []);
+var app = require('angular').module('BriocheServices', []);
 
-
-/**
- * HERE we list all of our controllers
- */
 app.factory('$sanitize', require('./$sanitize'));

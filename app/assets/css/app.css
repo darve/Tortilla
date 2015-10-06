@@ -1,0 +1,68 @@
+/* 	Flat UI Colours
+/* ======================================= */
+/* 	Base styles
+/* ======================================= */
+/* 	Typography styles
+/* ======================================= */
+/*  Form styling
+/* ======================================= */
+input[type=text], input[type=email], input[type=phone], select, textarea {
+  border: 1px solid #555;
+  outline: none;
+  padding: 8px 5px;
+  width: 100%;
+  font-size: 13px;
+  border-radius: 4px; }
+  input[type=text].margin-bottom, input[type=email].margin-bottom, input[type=phone].margin-bottom, select.margin-bottom, textarea.margin-bottom {
+    margin-bottom: 20px; }
+
+textarea {
+  height: 100px; }
+
+input[type=checkbox] {
+  margin: 0 0 0 0; }
+
+form .row {
+  display: block;
+  margin: 0 0 16px 0; }
+  form .row.full-width {
+    width: 100%; }
+  form .row.half-width {
+    display: inline-block;
+    width: 47%; }
+    form .row.half-width.left {
+      margin-right: 6%; }
+  form .row label {
+    display: block;
+    font-size: 15px;
+    padding: 0 0 3px 0; }
+    form .row label.inline-block {
+      display: inline-block;
+      vertical-align: top; }
+  form .row input {
+    display: block; }
+    form .row input.inline-block {
+      display: inline-block;
+      vertical-align: top; }
+
+/* 	Global styles
+/* ======================================= */
+* {
+  box-sizing: border-box; }
+
+body, html {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif; }
+
+.section, .inner {
+  display: block;
+  position: relative;
+  width: 100%; }
+
+.inner {
+  max-width: 1080px; }
+
+/* 	Shameful styles
+/* ======================================= */

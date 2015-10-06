@@ -1,8 +1,7 @@
 
 'use strict';
 
-var ng = require('angular'),
-    app = ng.module('BriocheApp', []);
+var app = require('angular').module('BriocheFilters', []);
 
 app.filter('slugify', require('./slugify'));
 app.filter('capitalize', require('./capitalize'));

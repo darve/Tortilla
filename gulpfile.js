@@ -30,7 +30,7 @@ var gulp            = require('gulp'),
     size            = require('gulp-filesize'),
 
     // Used for linting javascript and checking for issues
-    jshint          = require('gulp-jshint');
+    jshint          = require('gulp-jshint'),
 
     // Used for modular javascript development
     browserify      = require('browserify'),
@@ -49,6 +49,9 @@ var gulp            = require('gulp'),
     gutil           = require('gulp-util');
 
 
+// Polyfill required so the autoprefixer doesn't break.
+require('es6-promise').polyfill();
+
 /**
  * This task takes my lovely chunks of javascripts and browserifies them
  * so all of their dependencies are met in a nicely packaged way.
@@ -60,7 +63,7 @@ gulp.task('scripts', function () {
     return browserify({ entries: './app/assets/scripts/app.js', debug: true })
     // .transform(babelify)
     .bundle()
-    .pipe(source('app.min.js'))
+    .pipe(source('brioche.min.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
         // Add transformation tasks to the pipeline here.
@@ -80,10 +83,10 @@ gulp.task('jshint', function() {
         .pipe(jshint.reporter('default'))
 });
 
-gulp.task('templates', function() {
+gulp.task('views', function() {
     gulp.src('./app/views/*.html')
     .pipe(templateCache({
-        module: 'SymplifyApp',
+        module: 'BriocheApp',
         filename: 'views.js'
     }))
     .pipe(gulp.dest('./app/assets/scripts/'));
@@ -172,14 +175,11 @@ gulp.task('test', function() {
 });
 
 /**
- * This task monitors file changes and compiles the scss and lints
- * the javascript.
+ *
  */
 gulp.task('watch', function() {
     gulp.watch(['./app/assets/scripts/**/*.js', '!./app/assets/scripts/**/*.min.js'], ['scripts']);
-
-    gulp.watch('scss/**', ['sass']);
-    gulp.watch('app/assets/scripts/**/*.js', ['jshint']);
-    gulp.watch('./app/views/*.html', ['templates', 'angular']);
-    gulp.watch('app/assets/scripts/**/*.js', ['angular']);
+    gulp.watch('./scss/**', ['sass']);
+    // gulp.watch('./app/assets/scripts/**/*.js', ['jshint']);
+    gulp.watch('./app/views/**', ['views']);
 });

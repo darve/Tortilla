@@ -1,11 +1,7 @@
 
 'use strict';
 
-var ng = require('angular'),
-    app = ng.module('BriocheApp', []);
+var app = require('angular').module('BriocheControllers', []);
 
-
-/**
- * HERE we list all of our controllers
- */
 app.controller('MainController', require('./MainController'));
+app.controller('HomeController', require('./HomeController'));
