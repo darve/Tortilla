@@ -6,17 +6,18 @@
   "author": "David Woollard <dave@darve.co.uk>",
   "main": "app.js",
   "browser": {
-    "jquery": "./app/assets/scripts/vendor/jquery-v1.10.2.min.js",
-    "angular": "./app/assets/scripts/vendor/angular-1.3.16/index.js",
-    "angular-sanitize": "./app/assets/scripts/vendor/angular-1.3.16/angular-sanitize.js",
-    "angular.ui-router": "./app/assets/scripts/vendor/angular-1.3.16/angular.ui-router.js"
+    "jquery": "./src/vendor/jquery-v1.10.2.min.js",
+    "angular": "./src/vendor/angular-1.3.16/index.js",
+    "angular-sanitize": "./src/vendor/angular-1.3.16/angular-sanitize.js",
+    "angular.ui-router": "./src/vendor/angular-1.3.16/angular.ui-router.js"
   },
   "dependencies": {
     "express": "~4.13.3",
     "babelify": "~6.3.0",
     "body-parser": "~1.14.1",
     "gulp-sass": "~2.0.4",
-    "es6-promise": "~3.0.2"
+    "es6-promise": "~3.0.2",
+    "require-dir": "~0.3.0"
   },
   "devDependencies": {
     "vinyl-buffer": "~1.0.0",

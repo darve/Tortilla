@@ -1,0 +1,1 @@
+angular.module("BriocheApp").run(["$templateCache", function($templateCache) {$templateCache.put("home.html","<div id=\"home\" class=\"page\">\n	<div class=\"section\">\n		<div class=\"inner\">\n		<h1>Lads</h1>\n			<h2>{{ blurb }}</h2>\n		</div>\n	</div>\n</div>");}]);

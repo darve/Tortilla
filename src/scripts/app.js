@@ -12,17 +12,17 @@ require('./filters/');
 
 app = ng.module('BriocheApp', ['ui.router', 'BriocheControllers']);
 
-require('./views.js');
+require('../views/views.js');
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
     .state('home', {
-        url: "/",
-        templateUrl: "home.html",
-        controller: "HomeController"
+        url: '/',
+        templateUrl: 'home.html',
+        controller: 'HomeController'
     });
 }]);
 
