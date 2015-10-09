@@ -89,6 +89,7 @@ gulp.task('scripts', ['views'], function () {
  * and that my javascript is in fact perfectly formed.
  */
 gulp.task('jshint', function() {
+
     return gulp.src('./src/scripts/**/*.js')
         .pipe(jshint(require('./config/jshint.js')))
         .pipe(jshint.reporter('default'))
@@ -100,6 +101,7 @@ gulp.task('jshint', function() {
  * app name for the template cache
  */
 gulp.task('views', function() {
+
     return gulp.src('./src/views/*.html')
         .pipe(templateCache({
             module: 'BriocheApp',
@@ -115,6 +117,7 @@ gulp.task('views', function() {
  * Minifies if this task is run with the productiona argument.
  */
 gulp.task('sass', function() {
+
     return gulp.src('./src/scss/*.scss')
         .pipe(sass())
         .pipe(autoprefixer({
@@ -131,9 +134,10 @@ gulp.task('sass', function() {
  * Run the TAPE tests
  */
 gulp.task('test', function() {
+
     return gulp.src('./tests/*.js')
         .pipe(tape({
-          reporter: tap()
+            reporter: tap()
         }));
 });
 
@@ -142,6 +146,7 @@ gulp.task('test', function() {
  * Run the Protractor tests
  */
 gulp.task('e2e', function() {
+
     return gulp.src(["./tests/protractor/*.js"])
         .pipe(protractor({
             configFile: "./config/protractor.js"
@@ -161,6 +166,7 @@ gulp.task('build', ['jshint', 'test', 'sass', 'views', 'scripts']);
  *  Watch our source files and trigger a build when they change
  */
 gulp.task('watch', function() {
+
     gulp.watch([
         './src/scripts/**/*.js',
         './src/scss/**',
