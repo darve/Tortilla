@@ -51,7 +51,13 @@ var gulp            = require('gulp'),
     // Reporter used by the test runner
     tap             = require('tap-colorize'),
 
-    protractor      = require("gulp-protractor").protractor;
+    // Angular end-to-end testing tool
+    protractor      = require("gulp-protractor").protractor,
+
+    // These are used to perform tasks differently depending on the args
+    argv            = require('yargs').argv,
+    gulpif          = require('gulp-if'),
+    rename          = require('gulp-rename');
 
 
 /**
@@ -70,10 +76,11 @@ gulp.task('scripts', ['views'], function () {
         .pipe(source('brioche.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
-            .pipe(uglify())
+            .pipe(gulpif(argv.production, uglify()))
+            .pipe(gulpif(argv.production, rename({suffix: '.min'})))
+            .pipe(gulpif(argv.production, sourcemaps.write('./')));
             .on('error', gutil.log)
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./app/assets/scripts'));
+            .pipe(gulp.dest('./app/assets/scripts'));
 });
 
 
@@ -105,6 +112,7 @@ gulp.task('views', function() {
 /**
  * This task compiles, nay transforms my sass into a hard
  * shiny peg of truth (CSS). Compiles scss files for dev.
+ * Minifies if this task is run with the productiona argument.
  */
 gulp.task('sass', function() {
     return gulp.src('./src/scss/*.scss')
@@ -113,7 +121,8 @@ gulp.task('sass', function() {
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        // .pipe(mincss())
+        .pipe(gulpif(argv.production, mincss()))
+        .pipe(gulpif(argv.production, rename({suffix: '.min'})))
         .pipe(gulp.dest('./app/assets/css'));
 });
 
