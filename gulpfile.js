@@ -43,135 +43,118 @@ var gulp            = require('gulp'),
     sourcemaps      = require('gulp-sourcemaps'),
 
     // I'll be honest, I have no idea what this does.
-    gutil           = require('gulp-util');
+    gutil           = require('gulp-util'),
+
+    // Test-runner
+    tape            = require('gulp-tape'),
+
+    // Reporter used by the test runner
+    tap             = require('tap-colorize'),
+
+    protractor      = require("gulp-protractor").protractor;
 
 
-// Polyfill required so the autoprefixer doesn't break.
+/**
+ * Polyfill required so the autoprefixer doesn't break.
+ */
 require('es6-promise').polyfill();
+
 
 /**
  * Bundle and minify all of the source script files
  */
 gulp.task('scripts', ['views'], function () {
-  // set up the browserify instance on a task basis
+
     return browserify({ entries: './src/scripts/app.js', debug: true })
-    .bundle()
-    .pipe(source('brioche.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
-        .on('error', gutil.log)
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./app/assets/scripts'));
+        .bundle()
+        .pipe(source('brioche.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(uglify())
+            .on('error', gutil.log)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./app/assets/scripts'));
 });
+
 
 /**
  * This task is used to verify that I am not taking crazy pills
  * and that my javascript is in fact perfectly formed.
  */
 gulp.task('jshint', function() {
-    gulp.src('./src/scripts/**/*.js')
-        .pipe(jshint(require('./gulp/config/jshint.js')))
+    return gulp.src('./src/scripts/**/*.js')
+        .pipe(jshint(require('./config/jshint.js')))
         .pipe(jshint.reporter('default'))
 });
+
 
 /**
  * Compile the angular views into a single javascript file with the appropriate
  * app name for the template cache
  */
 gulp.task('views', function() {
-    gulp.src('./src/views/*.html')
-    .pipe(templateCache({
-        module: 'BriocheApp',
-        filename: 'views.js'
-    }))
-    .pipe(gulp.dest('./src/views/'));
+    return gulp.src('./src/views/*.html')
+        .pipe(templateCache({
+            module: 'BriocheApp',
+            filename: 'views.js'
+        }))
+        .pipe(gulp.dest('./src/views/'));
 });
+
 
 /**
  * This task compiles, nay transforms my sass into a hard
  * shiny peg of truth (CSS). Compiles scss files for dev.
  */
 gulp.task('sass', function() {
-    gulp.src('./src/scss/*.scss')
-    .pipe(sass())
-    .pipe(autoprefixer({
-        browsers: ['last 2 versions'],
-        cascade: false
-    }))
-    // .pipe(mincss())
-    .pipe(gulp.dest('./app/assets/css'));
+    return gulp.src('./src/scss/*.scss')
+        .pipe(sass())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        // .pipe(mincss())
+        .pipe(gulp.dest('./app/assets/css'));
 });
+
+
+/**
+ * Run the TAPE tests
+ */
+gulp.task('test', function() {
+    return gulp.src('./tests/*.js')
+        .pipe(tape({
+          reporter: tap()
+        }));
+});
+
+
+/**
+ * Run the Protractor tests
+ */
+gulp.task('e2e', function() {
+    return gulp.src(["./tests/protractor/*.js"])
+        .pipe(protractor({
+            configFile: "./config/protractor.js"
+        }))
+        .on('error', function(e) { throw e })
+});
+
 
 /**
  * This task is used to lint and minify everything and stick
  * it in a folder called 'prod'.
  */
-gulp.task('build', ['jshint', 'sass', 'views', 'scripts']);
-
-// function() {
-    // If the prod directory exists, delete it.
-    // del(['prod'], function() {
-
-    //     // Copy over any html files
-    //     gulp.src(['app/*.html'])
-    //         .pipe(processhtml())
-    //         .pipe(gulp.dest('prod'));
-
-    //     // Copy over any images
-    //     gulp.src(['app/assets/img/**/*'])
-    //         .pipe(gulp.dest('prod/assets/img'));
-
-    //     // JS
-    //     gulp.src('./app/assets/scripts/**/*.js')
-    //         .pipe(concat('app.js'))
-    //         .pipe(jshint())
-    //         .pipe(jshint.reporter('default'))
-    //         .pipe(gulp.dest('./prod/assets/scripts'))
-    //         .pipe(size())
-    //         .pipe(concat('app.min.js'))
-    //         .pipe(uglify())
-    //         .pipe(gulp.dest('./prod/assets/scripts'))
-    //         .pipe(size());
-
-    //     // SCSS
-    //     gulp.src('./scss/*.scss')
-    //         .pipe(sass())
-    //         .pipe(autoprefixer({
-    //             browsers: ['last 2 versions'],
-    //             cascade: false
-    //         }))
-    //         .pipe(concat('app.css'))
-    //         .pipe(gulp.dest('./prod/assets/css'))
-    //         .pipe(size())
-    //         .pipe(concat('app.min.css'))
-    //         .pipe(mincss())
-    //         .pipe(gulp.dest('./prod/assets/css'))
-    //         .pipe(size());
-    // });
-// });
-
-/**
- * Deletes the prod folder
- */
-gulp.task('clean', function() {
-    del(['prod']);
-});
+gulp.task('build', ['jshint', 'test', 'sass', 'views', 'scripts']);
 
 
 /**
- * Run the Mocha tests
- */
-gulp.task('test', function() {
-
-});
-
-/**
- *
+ *  Watch our source files and trigger a build when they change
  */
 gulp.task('watch', function() {
-    gulp.watch('./src/scripts/**/*.js', ['scripts']);
-    gulp.watch('./scss/**', ['sass']);
-    // gulp.watch('./app/assets/scripts/**/*.js', ['jshint']);
-    gulp.watch('./app/views/**', ['views']);
+    gulp.watch([
+        './src/scripts/**/*.js',
+        './src/scss/**',
+        './src/views/**/*.html'
+    ], ['build']);
 });
