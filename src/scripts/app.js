@@ -4,14 +4,27 @@
 var ng = require('angular'),
     app;
 
+/**
+ * Include our module dependencies
+ */
 require('angular-sanitize');
 require('angular.ui-router');
 require('./controllers/');
+require('./directives');
 require('./services/');
 require('./filters/');
 
-app = ng.module('BriocheApp', ['ui.router', 'BriocheControllers']);
+app = ng.module('TortillaApp', [
+    'ui.router',
+    'TortillaControllers',
+    'TortillaDirectives',
+    'TortillaServices',
+    'TortillaFilters'
+    ]);
 
+/**
+ * Include our compiled views
+ */
 require('../views/views.js');
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

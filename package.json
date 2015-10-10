@@ -1,8 +1,8 @@
 {
-  "name": "Brioche-V4",
+  "name": "Tortilla",
   "version": "0.0.1",
   "description": "Gulp / Angular / Browserify boilerplate",
-  "repository": "https://github.com/darve/brioche-v4.git",
+  "repository": "https://github.com/darve/tortilla.git",
   "author": "David Woollard <dave@darve.co.uk>",
   "main": "app.js",
   "browser": {

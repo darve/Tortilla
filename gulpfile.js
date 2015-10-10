@@ -73,7 +73,7 @@ gulp.task('scripts', ['views'], function () {
 
     return browserify({ entries: './src/scripts/app.js', debug: true })
         .bundle()
-        .pipe(source('brioche.js'))
+        .pipe(source('tortilla.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
             .pipe(gulpif(argv.production, uglify()))
@@ -104,7 +104,7 @@ gulp.task('views', function() {
 
     return gulp.src('./src/views/*.html')
         .pipe(templateCache({
-            module: 'BriocheApp',
+            module: 'TortillaApp',
             filename: 'views.js'
         }))
         .pipe(gulp.dest('./src/views/'));
