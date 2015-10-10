@@ -78,7 +78,7 @@ gulp.task('scripts', ['views'], function () {
         .pipe(sourcemaps.init({loadMaps: true}))
             .pipe(gulpif(argv.production, uglify()))
             .pipe(gulpif(argv.production, rename({suffix: '.min'})))
-            .pipe(gulpif(argv.production, sourcemaps.write('./')));
+            .pipe(gulpif(argv.production, sourcemaps.write('./')))
             .on('error', gutil.log)
             .pipe(gulp.dest('./app/assets/scripts'));
 });

@@ -1,3 +1,3 @@
-### Hex
+### Brioche V4
 
-Some hexagonal grid pathfinding stuff for a game I'm prototyping.
+A boilerplate for rapid Angular app development using Browserify / SASS / Gulp.
