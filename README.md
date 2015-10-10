@@ -32,9 +32,11 @@ Bundle all of the javascript source files with Browserify (required every time t
 
 	gulp scripts
 
-A task that compiles the scss, the angular templates, lints the javascript, bundles it together and then runs the unit tests:
+A task that compiles the scss, the angular templates, lints the javascript, bundles it together and then runs the unit tests. Run it with <code>--production</code> and it will minify the CSS and JS:
 	
 	gulp build
+	
+
 
 <hr/>
 
