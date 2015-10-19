@@ -43,6 +43,7 @@
     "tape": "~4.2.1",
     "vinyl-buffer": "~1.0.0",
     "vinyl-source-stream": "~1.1.0",
-    "yargs": "^3.27.0"
+    "yargs": "^3.27.0",
+    "gulp-run": "~1.6.11"
   }
 }
