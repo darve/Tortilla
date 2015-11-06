@@ -54,8 +54,6 @@ var gulp            = require('gulp'),
     // Angular end-to-end testing tool
     protractor      = require("gulp-protractor").protractor,
 
-    run             = require('gulp-run'),
-
     // These are used to perform tasks differently depending on the args
     argv            = require('yargs').argv,
     gulpif          = require('gulp-if'),
@@ -83,12 +81,6 @@ gulp.task('scripts', ['views'], function () {
             .pipe(gulpif(argv.production, sourcemaps.write('./')))
             .on('error', gutil.log)
             .pipe(gulp.dest('./app/assets/scripts'));
-});
-
-
-gulp.task('serve', function() {
-    run('node app.js').exec();
-    console.log('Express server running on port 3000');
 });
 
 
@@ -173,7 +165,7 @@ gulp.task('build', ['jshint', 'test', 'sass', 'views', 'scripts']);
 /**
  *  Watch our source files and trigger a build when they change
  */
-gulp.task('watch', ['serve'], function() {
+gulp.task('watch', function() {
 
     gulp.watch([
         './src/scripts/**/*.js',
